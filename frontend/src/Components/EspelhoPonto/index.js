@@ -40,6 +40,7 @@ function UserReport() {
     }
   }
 
+
   useEffect(() => {
     getDataReports()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -62,20 +63,20 @@ function UserReport() {
   //   return diff;
   // }
 
-  // // duração de uma jornada normal de trabalho
-  // // let jornadaNormal = duracaoTotal(dataReports.map((row) => row.entrada), (dataReports.map((row) => row.saida), '13:00', '18:00')
-  // // duração efetivamente trabalhada
-  // // let jornada = duracaoTotal('8', '12:06', '12:59', '17:00');
+  // let jornadaNormal = duracaoTotal();
 
-  // // // diferença entre as jornadas
-  // // let diff = jornada.subtract(jornadaNormal);
-  // // if (diff.asMinutes() != 0) {
-  // //   // imprimir a quantidade de horas e minutos
-  // //   console.log(`${Math.abs(diff.hours())} horas e ${Math.abs(diff.minutes())} minutos a ${diff.asMinutes() > 0 ? 'mais' : 'menos'}`);
-  // // }
+  // let jornada = duracaoTotal();
 
-  console.log(dataReports.map((row) => row.entrada))
-  console.log(dataReports.map((row) => row.saida))
+
+  // // diferença entre as jornadas
+  // let diff = jornada.subtract(jornadaNormal);
+  // if (diff.asMinutes() != 0) {
+  //   // imprimir a quantidade de horas e minutos
+  //   console.log(`${Math.abs(diff.hours())} horas e ${Math.abs(diff.minutes())} minutos a ${diff.asMinutes() > 0 ? 'mais' : 'menos'}`);
+  // }
+
+  // console.log(dataReports.map((row) => row.entrada))
+  // console.log(dataReports.map((row) => row.saida))
 
   return (
     <TableContainer component={Paper}>
