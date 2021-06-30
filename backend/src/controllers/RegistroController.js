@@ -16,13 +16,10 @@ module.exports = {
     if (registroAtual.length <= 0 && data.tipo_batida != 'Entrada') {
       return response.status(400).send('É necessário primeiro registrar a entrada.')
     }
-    //todo implementar validações
-    // if(data.tipo_batida != 'Inicio de almoço'){
-    //   return response.status(400).send('É necessário registrar inicio do almoço')
-    // }
+   
 
     if (registros.some(w => w.created_at == dataAtual)) {
-      //update da batida
+      //Validações para evitar que o mesmo registro seja sobreescrevido na tabela, e evitando ter mais de uma entrada.
       await connection("registros").update({
         saida_almoco:
           data.tipo_batida == "Inicio de almoço"
@@ -46,8 +43,7 @@ module.exports = {
         created_at: data.created_at,
       });
       return response.status(204).send();
-    } else {
-      //inserção da batida
+    } else {      
       const [id] = await connection("registros").insert({
         entrada: data.entrada,
         saida_almoco: data.saida_almoco,
