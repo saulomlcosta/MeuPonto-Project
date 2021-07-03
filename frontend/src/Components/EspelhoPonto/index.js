@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { useToasts } from "react-toast-notifications";
-import moment from "moment";
 import {
   Paper,
   Table,
@@ -23,7 +22,6 @@ function UserReport() {
   const userId = localStorage.getItem("funcionario_id");
   const [dataReports, setDataReports] = useState([])
 
-
   async function getDataReports() {
     try {
       const { data } = await api.get("funcionarios/relatorios", {
@@ -32,6 +30,7 @@ function UserReport() {
         },
       });
       setDataReports(data)
+
       // setDataReports(data)
     } catch (error) {
       addToast("Erro na busca de dados.", {
@@ -43,40 +42,10 @@ function UserReport() {
 
   useEffect(() => {
     getDataReports()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
 
 
-  // function duracaoTotal(entrada1, saida1, entrada2, saida2) {
-  //   let formatos = ['HH:mm', 'HH']; // formato do horário pode ser com ou sem os minutos
-  //   let inicio = moment(entrada1, formatos);
-  //   let fim = moment(saida1, formatos);
-  //   // diferença entre a hora inicial e final
-  //   let diff = moment.duration(fim.diff(inicio));
-
-  //   inicio = moment(entrada2, formatos);
-  //   fim = moment(saida2, formatos);
-  //   // obter diferença entre a nova hora inicial e final e somar ao valor anterior
-  //   diff.add(moment.duration(fim.diff(inicio)));
-
-  //   return diff;
-  // }
-
-  // let jornadaNormal = duracaoTotal();
-
-  // let jornada = duracaoTotal();
-
-
-  // // diferença entre as jornadas
-  // let diff = jornada.subtract(jornadaNormal);
-  // if (diff.asMinutes() != 0) {
-  //   // imprimir a quantidade de horas e minutos
-  //   console.log(`${Math.abs(diff.hours())} horas e ${Math.abs(diff.minutes())} minutos a ${diff.asMinutes() > 0 ? 'mais' : 'menos'}`);
-  // }
-
-  // console.log(dataReports.map((row) => row.entrada))
-  // console.log(dataReports.map((row) => row.saida))
 
   return (
     <TableContainer component={Paper}>

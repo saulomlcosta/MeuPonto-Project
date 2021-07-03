@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
+import { InputLabel, FormControl, Select, MenuItem } from "@material-ui/core";
 import { useToasts } from "react-toast-notifications";
 import Relogio from "../../Components/Relogio";
 import UserReport from "../../Components/EspelhoPonto";
@@ -56,10 +53,10 @@ export default function Ponto() {
       });
     }
   }
-
   const handleChangeTabs = (event, newValue) => {
     setAba(newValue);
   };
+
 
   useEffect(() => {
     if (!userId) {

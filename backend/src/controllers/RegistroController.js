@@ -11,19 +11,87 @@ module.exports = {
       .where("funcionarios_id", funcionarios_id)
       .select("*");
 
+    const registrosAtuais = await connection("registros");
+
+    function diferencaHoras(horaInicial, horaFinal) {
+
+      // Tratamento se a hora inicial é menor que a final	
+      if (!isHoraInicialMenorHoraFinal(horaInicial, horaFinal)) {
+        aux = horaFinal;
+        horaFinal = horaInicial;
+        horaInicial = aux;
+      }
+
+      hIni = horaInicial.split(':');
+      hFim = horaFinal.split(':');
+
+      horasTotal = parseInt(hFim[0], 10) - parseInt(hIni[0], 10);
+      minutosTotal = parseInt(hFim[1], 10) - parseInt(hIni[1], 10);
+
+      if (minutosTotal < 0) {
+        minutosTotal += 60;
+        horasTotal -= 1;
+      }
+
+      horaFinal = completaZeroEsquerda(horasTotal) + ":" + completaZeroEsquerda(minutosTotal);
+      return horaFinal;
+    }
+
+    function isHoraInicialMenorHoraFinal(horaInicial, horaFinal) {
+      horaIni = horaInicial.split(':');
+      horaFim = horaFinal.split(':');
+
+      // Verifica as horas. Se forem diferentes, é só ver se a inicial 
+      // é menor que a final.
+      hIni = parseInt(horaIni[0], 10);
+      hFim = parseInt(horaFim[0], 10);
+      if (hIni != hFim)
+        return hIni < hFim;
+
+      // Se as horas são iguais, verifica os minutos então.
+      mIni = parseInt(horaIni[1], 10);
+      mFim = parseInt(horaFim[1], 10);
+      if (mIni != mFim)
+        return mIni < mFim;
+    }
+
+    function completaZeroEsquerda(numero) {
+      return (numero < 10 ? "0" + numero : numero);
+    }
+
+    if (data.entrada != null && data.saida != null && registrosAtuais[0].saida != null) {
+      var entradaSaida = (diferencaHoras(registrosAtuais[0].saida, registrosAtuais[0].entrada))
+      var almocoDif = (diferencaHoras(registrosAtuais[0].saida_almoco, registrosAtuais[0].retorno_almoco))
+      var lancheDif = (diferencaHoras(registrosAtuais[0].saida_lanche, registrosAtuais[0].retorno_lanche))
+      var pausaDiff = (diferencaHoras(almocoDif, lancheDif));
+
+      var hourTotal = (diferencaHoras(entradaSaida, pausaDiff));
+    }
+
+    console.log(registrosAtuais[0])
+
+
     var registroAtual = registros.filter(w => w.created_at == dataAtual)
 
     if (registroAtual.length <= 0 && data.tipo_batida != 'Entrada') {
       return response.status(400).send('É necessário primeiro registrar a entrada.')
     }
-    //todo implementar validações
-    // if(data.tipo_batida != 'Inicio de almoço'){
+
+    // if (registroAtual.entrada > 0 && data.tipo_batida != 'Inicio de almoço') {
     //   return response.status(400).send('É necessário registrar inicio do almoço')
     // }
 
+
+    //Inserção da batida e atualização da mesma.
+
+
+
+
+
     if (registros.some(w => w.created_at == dataAtual)) {
-      //update da batida
       await connection("registros").update({
+        entrada:
+          data.entrada != null ? registroAtual.entrada : data.entrada,
         saida_almoco:
           data.tipo_batida == "Inicio de almoço"
             ? data.saida_almoco
@@ -41,7 +109,7 @@ module.exports = {
             ? data.retorno_lanche
             : registroAtual.retorno_lanche,
         saida: data.tipo_batida == "Saída" ? data.saida : registroAtual.saida,
-        hrs_trabalhadas: data.hrs_trabalhadas,
+        hrs_trabalhadas: hourTotal,
         tipo_batida: data.tipo_batida,
         created_at: data.created_at,
       });
