@@ -11,6 +11,9 @@ module.exports = {
       .where("funcionarios_id", funcionarios_id)
       .select("*");
 
+    
+    // Função que calcula as horas trabalhadas.
+    
     function diferencaHoras(horaInicial, horaFinal) {
 
       // Tratamento se a hora inicial é menor que a final	
