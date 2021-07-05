@@ -90,14 +90,12 @@ module.exports = {
 
 
 
-    if (registros[0] < 0 && data.tipo_batida != 'Entrada') {
+    if (data.tipo_batida != 'Entrada') {
       return response.status(400).send('É necessário primeiro registrar a entrada.')
     }
 
 
     //Inserção da batida e atualização da mesma.
-
-
 
     if (registros.some(w => w.created_at == dataAtual)) {
       await connection("registros").update({
