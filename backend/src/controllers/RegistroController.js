@@ -53,6 +53,23 @@ module.exports = {
         return mIni < mFim;
     }
 
+    function somaHora(horaInicio, horaSomada) {
+
+      horaIni = horaInicio.split(':');
+      horaSom = horaSomada.split(':');
+
+      horasTotal = parseInt(horaIni[0], 10) + parseInt(horaSom[0], 10);
+      minutosTotal = parseInt(horaIni[1], 10) + parseInt(horaSom[1], 10);
+
+      if (minutosTotal >= 60) {
+        minutosTotal -= 60;
+        horasTotal += 1;
+      }
+
+      horaFinal = completaZeroEsquerda(horasTotal) + ":" + completaZeroEsquerda(minutosTotal);
+      return horaFinal;
+    }
+
     function completaZeroEsquerda(numero) {
       return (numero < 10 ? "0" + numero : numero);
     }
@@ -61,7 +78,7 @@ module.exports = {
       var entradaSaida = (diferencaHoras(registros[0].saida, registros[0].entrada))
       var almocoDif = (diferencaHoras(registros[0].saida_almoco, registros[0].retorno_almoco))
       var lancheDif = (diferencaHoras(registros[0].saida_lanche, registros[0].retorno_lanche))
-      var pausaDiff = (diferencaHoras(almocoDif, lancheDif));
+      var pausaDiff = (somaHora(almocoDif, lancheDif));
 
       var hourTotal = (diferencaHoras(entradaSaida, pausaDiff));
     }
