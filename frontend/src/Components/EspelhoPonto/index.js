@@ -46,7 +46,6 @@ function UserReport() {
 
 
 
-
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -54,10 +53,10 @@ function UserReport() {
           <TableRow>
             <TableCell>Data</TableCell>
             <TableCell>Entrada</TableCell>
-            <TableCell>Saida Almoço</TableCell>
+            <TableCell>Início de Almoço</TableCell>
             <TableCell>Retorno Almoço</TableCell>
-            <TableCell>Saida Lanche</TableCell>
-            <TableCell>Retorno Lanche</TableCell>
+            <TableCell>Início de Lanche</TableCell>
+            <TableCell>Retorno de Lanche</TableCell>
             <TableCell>Saida</TableCell>
             <TableCell>Total de Horas Trabalhadas</TableCell>
           </TableRow>
