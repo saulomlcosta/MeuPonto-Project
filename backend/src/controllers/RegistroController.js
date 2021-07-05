@@ -82,7 +82,12 @@ module.exports = {
 
       var hourTotal = (diferencaHoras(entradaSaida, pausaDiff));
     }
-
+    
+    //Validação da primeira inserção.
+    
+      if (registros[0] == undefined && data.tipo_batida != 'Entrada') {
+      return response.status(400).send('É necessário primeiro registrar a entrada.')
+    }
  
 
     //Inserção da batida e atualização da mesma.
