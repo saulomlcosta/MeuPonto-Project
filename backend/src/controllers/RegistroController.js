@@ -83,17 +83,7 @@ module.exports = {
       var hourTotal = (diferencaHoras(entradaSaida, pausaDiff));
     }
 
-    console.log('Sou a dif entrada/saida', entradaSaida);
-    console.log('Sou a dif almoco', almocoDif);
-    console.log('Sou a dif lanche', lancheDif)
-    console.log('Sou a dif pausaDiff', pausaDiff)
-
-
-
-    if (data.tipo_batida != 'Entrada') {
-      return response.status(400).send('É necessário primeiro registrar a entrada.')
-    }
-
+ 
 
     //Inserção da batida e atualização da mesma.
 
