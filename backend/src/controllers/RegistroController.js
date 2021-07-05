@@ -11,8 +11,6 @@ module.exports = {
       .where("funcionarios_id", funcionarios_id)
       .select("*");
 
-    const registrosAtuais = await connection("registros");
-
     function diferencaHoras(horaInicial, horaFinal) {
 
       // Tratamento se a hora inicial é menor que a final	
@@ -59,56 +57,55 @@ module.exports = {
       return (numero < 10 ? "0" + numero : numero);
     }
 
-    if (data.entrada != null && data.saida != null && registrosAtuais[0].saida != null) {
-      var entradaSaida = (diferencaHoras(registrosAtuais[0].saida, registrosAtuais[0].entrada))
-      var almocoDif = (diferencaHoras(registrosAtuais[0].saida_almoco, registrosAtuais[0].retorno_almoco))
-      var lancheDif = (diferencaHoras(registrosAtuais[0].saida_lanche, registrosAtuais[0].retorno_lanche))
+    if (data.entrada != null && data.saida != null && registros[0].saida != null) {
+      var entradaSaida = (diferencaHoras(registros[0].saida, registros[0].entrada))
+      var almocoDif = (diferencaHoras(registros[0].saida_almoco, registros[0].retorno_almoco))
+      var lancheDif = (diferencaHoras(registros[0].saida_lanche, registros[0].retorno_lanche))
       var pausaDiff = (diferencaHoras(almocoDif, lancheDif));
 
       var hourTotal = (diferencaHoras(entradaSaida, pausaDiff));
     }
 
-    console.log(registrosAtuais[0])
+    console.log('Sou a dif entrada/saida', entradaSaida);
+    console.log('Sou a dif almoco', almocoDif);
+    console.log('Sou a dif lanche', lancheDif)
+    console.log('Sou a dif pausaDiff', pausaDiff)
 
 
-    var registroAtual = registros.filter(w => w.created_at == dataAtual)
 
-    if (registroAtual.length <= 0 && data.tipo_batida != 'Entrada') {
+    if (registros[0] < 0 && data.tipo_batida != 'Entrada') {
       return response.status(400).send('É necessário primeiro registrar a entrada.')
     }
-
-    // if (registroAtual.entrada > 0 && data.tipo_batida != 'Inicio de almoço') {
-    //   return response.status(400).send('É necessário registrar inicio do almoço')
-    // }
 
 
     //Inserção da batida e atualização da mesma.
 
 
 
-
-
     if (registros.some(w => w.created_at == dataAtual)) {
       await connection("registros").update({
         entrada:
-          data.entrada != null ? registroAtual.entrada : data.entrada,
+          data.entrada != null ? registros[0].entrada : data.entrada,
         saida_almoco:
-          data.tipo_batida == "Inicio de almoço"
-            ? data.saida_almoco
-            : registroAtual.saida_almoco,
+          registros[0].saida_almoco != null
+            ? registros[0].saida_almoco
+            : data.saida_almoco,
         retorno_almoco:
-          data.tipo_batida == "Retorno de almoço"
-            ? data.retorno_almoco
-            : registroAtual.retorno_almoco,
+          registros[0].retorno_almoco != null
+            ? registros[0].retorno_almoco
+            : data.retorno_almoco,
         saida_lanche:
-          data.tipo_batida == "Inicio de lanche"
-            ? data.saida_lanche
-            : registroAtual.saida_lanche,
+          registros[0].saida_lanche != null
+            ? registros[0].saida_lanche
+            : data.saida_lanche,
         retorno_lanche:
-          data.tipo_batida == "Retorno de lanche"
-            ? data.retorno_lanche
-            : registroAtual.retorno_lanche,
-        saida: data.tipo_batida == "Saída" ? data.saida : registroAtual.saida,
+          registros[0].retorno_lanche != null
+            ? registros[0].retorno_lanche
+            : data.retorno_lanche,
+        saida:
+          registros[0].saida != null
+            ? registros[0].saida
+            : data.saida,
         hrs_trabalhadas: hourTotal,
         tipo_batida: data.tipo_batida,
         created_at: data.created_at,
