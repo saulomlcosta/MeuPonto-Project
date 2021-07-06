@@ -1,5 +1,5 @@
 <h1 align="center">
-	![image](https://user-images.githubusercontent.com/79532045/124631274-9d73ce00-de59-11eb-8c5b-5f05ed9d0bb2.png)
+	![MyLogo](https://user-images.githubusercontent.com/79532045/124631274-9d73ce00-de59-11eb-8c5b-5f05ed9d0bb2.png)
 </h1>
 
 <h4 align="center"> 
