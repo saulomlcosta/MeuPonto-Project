@@ -1,4 +1,3 @@
-
 <h1 align="center"> 
 	:heavy_check_mark: 🚀 MeuPonto-Project :heavy_check_mark:
 </h1>
@@ -40,7 +39,7 @@ MeuPonto-Project is a time attendance project, focused on the usability in compa
 </h1>
 
 ## :video_camera: Preview
-![](.github/Desktop.gif)
+![Desktop](https://user-images.githubusercontent.com/79532045/124634764-16c0f000-de5d-11eb-9a07-e6fa3d512276.gif)
 
 
 ## :rocket: Technologies
