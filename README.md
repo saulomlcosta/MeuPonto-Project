@@ -33,7 +33,7 @@
 
 ## :computer: Project
 
-Be The Hero is a project that aims to connect people who are willing to help ONGs.
+MeuPonto-Project is a time attendance project, focused on the usability in companies.
 
 <h1 align="center">
     <img alt="Login-Page" title="Login-Page" src=".github/preview.jpg" width="500px" />
