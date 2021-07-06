@@ -36,7 +36,7 @@
 MeuPonto-Project is a time attendance project, focused on the usability in companies.
 
 <h1 align="center">
-    <img alt="Login-Page" title="Login-Page" src=".github/preview.jpg" width="500px" />
+    <img alt="Login-Page" title="Login-Page" src="github/preview.jpg" width="500px" />
 </h1>
 
 ## :video_camera: Preview
