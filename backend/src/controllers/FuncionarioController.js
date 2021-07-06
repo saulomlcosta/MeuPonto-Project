@@ -31,7 +31,6 @@ module.exports = {
     const registrosFuncionario = await connection("registros")
       .where("funcionarios_id", id)
       .select(["registros.*"]);
-    console.log(id);
     return response.json(registrosFuncionario);
   }
 };
