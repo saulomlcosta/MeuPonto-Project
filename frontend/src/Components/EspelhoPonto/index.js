@@ -31,7 +31,6 @@ function UserReport() {
       });
       setDataReports(data)
 
-      // setDataReports(data)
     } catch (error) {
       addToast("Erro na busca de dados.", {
         appearance: "error",
