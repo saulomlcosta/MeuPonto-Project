@@ -1,10 +1,7 @@
-<h1 align="center">
-	![MyLogo](https://user-images.githubusercontent.com/79532045/124631274-9d73ce00-de59-11eb-8c5b-5f05ed9d0bb2.png)
-</h1>
 
-<h4 align="center"> 
+<h1 align="center"> 
 	:heavy_check_mark: 🚀 MeuPonto-Project :heavy_check_mark:
-</h4>
+</h1>
 <p align="center">
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/saulomlcosta/MeuPonto-Project?color=%2304D361">
 
