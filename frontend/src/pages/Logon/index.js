@@ -22,7 +22,7 @@ export default function Logon() {
 
       history.push("/ponto");
     } catch (error) {
-      addToast('Falha no login, tente novamente.', {
+      addToast('Falha no login, por gentileza tente novamente.', {
         appearance: "error"
       });
     }
